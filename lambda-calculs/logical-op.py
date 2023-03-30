@@ -22,18 +22,19 @@ class Bool:
 
 b = Bool()
 
-# print(b.lam_not(b.false)(1)(0))
 
-# Printing Truth Table for and
-print("Logical And truth table\n------")
+print("\nLogical \"And\" table\n------")
 print("1) False, False", b.lam_and(b.false, b.false)(1)(0))
 print("2) False, True", b.lam_and(b.false, b.true)(1)(0))
 print("3) True, False", b.lam_and(b.true, b.false)(1)(0))
 print("4) True, True",b.lam_and(b.true, b.true)(1)(0))
 
-# Printing Truth table for or
-print("Truth Table for or\n------")
+print("\nLogical \"OR\" table\n------")
 print("1) False, False", b.lam_or(b.false, b.false)(1)(0))
 print("2) False, True", b.lam_or(b.false, b.true)(1)(0))
 print("3) True, False", b.lam_or(b.true, b.false)(1)(0))
 print("4) True, True", b.lam_or(b.true, b.true)(1)(0))
+
+print("\nLoical \"NOT\" table\n------")
+print("NOT Flase", b.lam_not(b.false)(1)(0))
+print("NOT True", b.lam_not(b.true)(1)(0))
