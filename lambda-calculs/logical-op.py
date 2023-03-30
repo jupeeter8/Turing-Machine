@@ -5,14 +5,14 @@ class Bool:
 
 
     def lam_not(self, boolean):
-        no = lambda n: (n)(self.false)(self.true)
-        return no(boolean)
+        l_not = lambda n: (n)(self.false)(self.true)
+        return l_not(boolean)
 
 
     def lam_and(self, sig1, sig2):
-        an = lambda x: lambda y: (x)(y(self.true)(self.false))(self.false)
+        l_and = lambda x: lambda y: (x)(y(self.true)(self.false))(self.false)
         # an = lambda x, y: (x)(y(self.true)(self.false))(self.false)
-        return an(sig1)(sig2)
+        return l_and(sig1)(sig2)
 
 
     def lam_or(self, sig1, sig2):
