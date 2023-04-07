@@ -1,4 +1,3 @@
-import random
 from collections import deque
 
 
@@ -47,11 +46,9 @@ def DFS(G: Graph, start: int, visited=None):
     return None
 
 
-def DFS_stack(G: Graph, start: int, visited=None, stack=None) -> None:
-    if visited is None:
-        visited: list[bool] = [False] * G.v
-    if stack is None:
-        stack: list[int] = []
+def DFS_stack(G: Graph, start: int) -> None:
+    visited: list[bool] = [False] * G.v
+    stack: list[int] = []
     stack.append(start)
     while stack:
         node = stack.pop()
@@ -80,9 +77,7 @@ def BFS(G: Graph, v: int) -> None:
 
 nodes = [1, 2, 3, 4, 5]
 edges = [(1, 2), (1, 3), (1, 4), (4, 5), (2, 4)]
-print(edges)
 G = Graph(edges, nodes)
-# G.add_edge((5, 6))
 print(G)
 DFS(G, 1)
 print()
