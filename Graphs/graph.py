@@ -1,8 +1,12 @@
-class Graph:
-    def __init__(self, pairList: list[tuple[int, int]]) -> None:
-        self.adj_list = {int: list}
+import random
+from collections import deque
 
-        for n1, n2 in pairList:
+
+class Graph:
+    def __init__(self, edges: list[tuple[int, int]], nodes: list[int]) -> None:
+        self.adj_list = {}
+
+        for n1, n2 in edges:
             if n1 not in self.adj_list:
                 self.adj_list[n1] = []
             if n2 not in self.adj_list:
@@ -10,7 +14,7 @@ class Graph:
 
             self.adj_list[n1].append(n2)
             self.adj_list[n2].append(n1)
-        self.v = len(self.adj_list) - 1
+        self.v = len(nodes)
 
     def add_edge(self, edge: tuple[int, int]) -> None:
         n1, n2 = edge
@@ -43,13 +47,45 @@ def DFS(G: Graph, start: int, visited=None):
     return None
 
 
-def DFS_stack(G: Graph, start: int, visited=None):
+def DFS_stack(G: Graph, start: int, visited=None, stack=None) -> None:
     if visited is None:
         visited: list[bool] = [False] * G.v
+    if stack is None:
+        stack: list[int] = []
+    stack.append(start)
+    while stack:
+        node = stack.pop()
+        if not visited[node - 1]:
+            visited[node - 1] = True
+            print(node, end=" ")
+            for w in G.adj_list[node]:
+                stack.append(w)
 
 
-pair = [(1, 2), (2, 4), (2, 5), (4, 6), (3, 4), (6, 3)]
-G = Graph(pair)
-G.add_edge((5, 6))
+def BFS(G: Graph, v: int) -> None:
+    visited = dict.fromkeys(list(G.adj_list.keys()), False)
+    queue = deque()
+
+    queue.append(v)
+    while queue:
+        node = queue.popleft()
+        if not visited[node]:
+            visited[node] = True
+            print(node, end=" ")
+            for w in G.adj_list[node]:
+                if not visited[w]:
+                    queue.append(w)
+    return None
+
+
+nodes = [1, 2, 3, 4, 5]
+edges = [(1, 2), (1, 3), (1, 4), (4, 5), (2, 4)]
+print(edges)
+G = Graph(edges, nodes)
+# G.add_edge((5, 6))
 print(G)
 DFS(G, 1)
+print()
+DFS_stack(G, 1)
+print()
+BFS(G, 1)
