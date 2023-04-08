@@ -3,7 +3,7 @@ from collections import deque
 
 class Graph:
     def __init__(self, edges: list[tuple[int, int]], nodes: list[int]) -> None:
-        self.adj_list = {}
+        self.adj_list: dict[int, list] = {}
 
         for n1, n2 in edges:
             if n1 not in self.adj_list:
@@ -75,12 +75,14 @@ def BFS(G: Graph, v: int) -> None:
     return None
 
 
-nodes = [1, 2, 3, 4, 5]
-edges = [(1, 2), (1, 3), (1, 4), (4, 5), (2, 4)]
-G = Graph(edges, nodes)
-print(G)
-DFS(G, 1)
-print()
-DFS_stack(G, 1)
-print()
-BFS(G, 1)
+if __name__ == "__main__":
+
+    nodes = [1, 2, 3, 4, 5]
+    edges = [(1, 2), (1, 3), (1, 4), (4, 5), (2, 4)]
+    G = Graph(edges, nodes)
+    print(G)
+    DFS(G, 1)
+    print()
+    DFS_stack(G, 1)
+    print()
+    BFS(G, 1)
