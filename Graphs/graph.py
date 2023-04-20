@@ -2,17 +2,28 @@ from collections import deque
 
 
 class Graph:
-    def __init__(self, edges: list[tuple[int, int]], nodes: list[int]) -> None:
+    def __init__(
+        self, edges: list[tuple[int, int]], nodes: list[int], directed=False
+    ) -> None:
         self.adj_list: dict[int, list] = {}
 
-        for n1, n2 in edges:
-            if n1 not in self.adj_list:
-                self.adj_list[n1] = []
-            if n2 not in self.adj_list:
-                self.adj_list[n2] = []
+        if not directed:
+            for n1, n2 in edges:
+                if n1 not in self.adj_list:
+                    self.adj_list[n1] = []
+                if n2 not in self.adj_list:
+                    self.adj_list[n2] = []
 
-            self.adj_list[n1].append(n2)
-            self.adj_list[n2].append(n1)
+                self.adj_list[n1].append(n2)
+                self.adj_list[n2].append(n1)
+        if directed:
+            for n1, n2 in edges:
+                if n1 not in self.adj_list:
+                    self.adj_list[n1] = []
+                if n2 not in self.adj_list:
+                    self.adj_list[n2] = []
+
+                self.adj_list[n1].append(n2)
         self.v = len(nodes)
 
     def add_edge(self, edge: tuple[int, int]) -> None:
@@ -76,7 +87,6 @@ def BFS(G: Graph, v: int) -> None:
 
 
 if __name__ == "__main__":
-
     nodes = [1, 2, 3, 4, 5]
     edges = [(1, 2), (1, 3), (1, 4), (4, 5), (2, 4)]
     G = Graph(edges, nodes)
