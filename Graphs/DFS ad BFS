@@ -1,0 +1,39 @@
+from graph import Graph
+from collections import deque
+
+
+def DFS(G: Graph, source, visited=None):
+    if visited is None:
+        visited = dict.fromkeys(list(G.adj_list.keys()), False)
+    stack: list = []
+    stack.append(source)
+    while stack:
+        current_node = stack.pop()
+        if not visited[current_node]:
+            visited[current_node] = True
+            print(current_node, end=" ")
+            for w in G.adj_list[current_node]:
+                stack.append(w)
+
+
+def BFS(G: Graph, source: int, visited: any = None) -> None:
+    if visited is None:
+        visited = dict().fromkeys(G.adj_list.keys(), False)
+    queue = deque()
+    queue.append(source)
+    while queue:
+        current_node = queue.popleft()
+        if not visited[current_node]:
+            visited[current_node] = True
+            print(current_node, end=" ")
+            for w in G.adj_list[current_node]:
+                queue.append(w)
+    return None
+
+
+nodes = ["f", "g", "h", "i", "j", "k"]
+edges = [("f", "g"), ("f", "i"), ("g", "h"), ("i", "g"), ("i", "k"), ("j", "i")]
+
+G = Graph(edges, nodes, directed=True)
+print(G)
+BFS(G, "f")
