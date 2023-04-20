@@ -6,16 +6,16 @@ class Graph:
         self, edges: list[tuple[int, int]], nodes: list[int], directed=False
     ) -> None:
         self.adj_list: dict[int, list] = {}
-
+        self.nodes = nodes
         if not directed:
             for n1, n2 in edges:
                 if n1 not in self.adj_list:
                     self.adj_list[n1] = []
-                if n2 not in self.adj_list:
+                if n2 not in self.adj_list and n2 is not None:
                     self.adj_list[n2] = []
 
-                self.adj_list[n1].append(n2)
-                self.adj_list[n2].append(n1)
+                self.adj_list[n1].append(n2) if n2 is not None else None
+                self.adj_list[n2].append(n1) if n2 is not None else None
         if directed:
             for n1, n2 in edges:
                 if n1 not in self.adj_list:
